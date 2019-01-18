@@ -1,4 +1,4 @@
-package com.qa.Classroom_api;
+package com.qa.classroom_api;
 
 /**
  * Hello world!

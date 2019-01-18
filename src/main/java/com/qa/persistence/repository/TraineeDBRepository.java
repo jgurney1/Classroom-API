@@ -38,7 +38,7 @@ public class TraineeDBRepository implements TraineeRepository{
 	public String removeFromClassroom(int roomId, String trainee) {
 		Trainee toRemove = util.getObjectForJSON(trainee, Trainee.class);
 		Trainee newRoomId = util.getObjectForJSON(trainee, Trainee.class);
-		newRoomId.setRoomId((Integer) null);
+		newRoomId.setRoomId(999);
 		if(toRemove != null) {
 			manager.remove(toRemove);
 			manager.persist(newRoomId);

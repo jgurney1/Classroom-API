@@ -25,7 +25,7 @@ public class ClassroomDBRepository implements ClassroomRepository{
 	private JSONUtil util;
 	
 	public String getAllClassrooms() {
-		Query query = manager.createQuery("SELECT a FROM Classroom a");
+		Query query = manager.createQuery("SELECT a FROM Classroom a WHERE a.roomId < 999");
 		@SuppressWarnings("unchecked")
 		Collection<Classroom> rooms = (Collection<Classroom>) query.getResultList();
 		return util.getJSONForObject(rooms);

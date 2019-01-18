@@ -10,7 +10,7 @@ public class Trainee {
 	private int traineeId;
 	private String traineeName;
 	
-	@ManyToOne
+	//@ManyToOne(fetch=FetchType.LAZY)
 	private int roomId;
 	
 	public Trainee() {

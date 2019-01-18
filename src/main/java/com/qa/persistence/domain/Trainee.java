@@ -37,4 +37,8 @@ public class Trainee {
 		return roomId;
 	}
 	
+	public void setRoomId(int id) {
+		this.roomId = id;
+	}
+	
 }

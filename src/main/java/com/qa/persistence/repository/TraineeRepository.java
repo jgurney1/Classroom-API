@@ -5,5 +5,6 @@ public interface TraineeRepository {
 	String addToClassroom(int roomId, String trainee);
 	String removeFromClassroom(int roomId, String trainee);
 	String getAllTrainees();
+	String createTrainee(String trainee);
 	
 }

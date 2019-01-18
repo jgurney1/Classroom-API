@@ -26,19 +26,23 @@ public class TraineeDBRepository implements TraineeRepository{
 	private JSONUtil util;
 	
 	@Transactional(REQUIRED)
-	public String addToClassroom(int roomId, String trainee) {
+	public String addToClassroom(int traineeId, String trainee) {
 		Trainee toAdd = util.getObjectForJSON(trainee, Trainee.class);
-		toAdd.setRoomId(roomId);
-		manager.persist(toAdd);
-		return "{\"message\": \"Classroom Updated\"}";
+		Trainee toRemove = findTrainee(traineeId);
+		if(toRemove != null) {
+			manager.remove(toRemove);
+			manager.persist(toAdd);
+			return "{\"message\": \"Classroom Updated\"}";
+		}
+		
+		return "{\"message\": \"Classroom not found\"}";
 	}
 
-	@SuppressWarnings("null")
 	@Transactional(REQUIRED)
-	public String removeFromClassroom(int roomId, String trainee) {
-		Trainee toRemove = util.getObjectForJSON(trainee, Trainee.class);
+	public String removeFromClassroom(int traineeId, String trainee) {
+		Trainee toRemove = findTrainee(traineeId);
 		Trainee newRoomId = util.getObjectForJSON(trainee, Trainee.class);
-		newRoomId.setRoomId(999);
+		newRoomId.setRoomId(-1);
 		if(toRemove != null) {
 			manager.remove(toRemove);
 			manager.persist(newRoomId);
@@ -52,6 +56,16 @@ public class TraineeDBRepository implements TraineeRepository{
 		@SuppressWarnings("unchecked")
 		Collection<Trainee> trainees = (Collection<Trainee>) query.getResultList();
 		return util.getJSONForObject(trainees);
+	}
+	
+	public Trainee findTrainee(int id) {
+		return manager.find(Trainee.class, id);
+	}
+
+	public String createTrainee(String trainee) {
+		Trainee newTrainee = util.getObjectForJSON(trainee, Trainee.class);
+		manager.persist(newTrainee);
+		return "{\"message\": \"Trainee added\"}";
 	}
 
 }

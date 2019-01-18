@@ -2,6 +2,7 @@ package com.qa.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,10 +29,17 @@ public class TraineeEndpoint {
 		return service.addToClassroom(roomId, trainee);
 	}
 	
-	@Path("/removefromclassroom")
+	@Path("/removefromclassroom/{id}")
 	@PUT
 	@Produces({"application/json"})
-	public String removeFromClassRoom(int roomId, String trainee) {
+	public String removeFromClassRoom(@PathParam("id") int roomId, String trainee) {
 		return service.removeFromClassroom(roomId, trainee);
+	}
+	
+	@Path("/createtrainee")
+	@POST
+	@Produces({"application/json"})
+	public String createTrainee(String trainee) {
+		return service.createTrainee(trainee);
 	}
 }

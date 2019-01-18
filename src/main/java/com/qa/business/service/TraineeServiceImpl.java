@@ -4,6 +4,8 @@ import javax.inject.Inject;
 
 import com.qa.persistence.repository.TraineeRepository;
 
+
+
 public class TraineeServiceImpl implements TraineeService{
 
 	@Inject
@@ -19,6 +21,10 @@ public class TraineeServiceImpl implements TraineeService{
 
 	public String getAllTrainees() {
 		return repo.getAllTrainees();
+	}
+
+	public String createTrainee(String trainee) {
+		return repo.createTrainee(trainee);
 	}
 
 }

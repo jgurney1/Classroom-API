@@ -6,13 +6,16 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
+import com.qa.persistence.domain.Classroom;
+import com.qa.util.JSONUtil;
+
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.Collection;
 
-import com.qa.persistence.domain.Classroom;
-import com.qa.util.JSONUtil;
+
 
 @Transactional(SUPPORTS)
 @Default
@@ -25,7 +28,7 @@ public class ClassroomDBRepository implements ClassroomRepository{
 	private JSONUtil util;
 	
 	public String getAllClassrooms() {
-		Query query = manager.createQuery("SELECT a FROM Classroom a WHERE a.roomId < 999");
+		Query query = manager.createQuery("SELECT a FROM Classroom a WHERE a.roomId > 0");
 		@SuppressWarnings("unchecked")
 		Collection<Classroom> rooms = (Collection<Classroom>) query.getResultList();
 		return util.getJSONForObject(rooms);

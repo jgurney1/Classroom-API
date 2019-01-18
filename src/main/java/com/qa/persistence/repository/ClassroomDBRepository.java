@@ -8,12 +8,14 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Classroom;
+import com.qa.persistence.domain.Trainee;
 import com.qa.util.JSONUtil;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.Collection;
+import java.util.List;
 
 
 
@@ -49,6 +51,16 @@ public class ClassroomDBRepository implements ClassroomRepository{
 	
 	public Classroom findRoom(int id) {
 		return manager.find(Classroom.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(REQUIRED)
+	public String getFull(int roomID) {
+		Query query = manager.createQuery("SELECT a FROM Trainee a WHERE a.roomId =" + roomID);
+		Classroom populated = findRoom(roomID);
+		populated.setTrainees(query.getResultList());
+		
+		return null;
 	}
 
 }

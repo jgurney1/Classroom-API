@@ -1,6 +1,9 @@
 package com.qa.persistence.domain;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +13,7 @@ public class Classroom {
 	@Id
 	private int roomId;
 	private String trainer;
+	private List<Trainee> trainees = new ArrayList<Trainee>();
 	
 	public Classroom() {
 		//meant to be empty
@@ -29,6 +33,14 @@ public class Classroom {
 
 	public int getRoomId() {
 		return roomId;
+	}
+
+	public List<Trainee> getTrainees() {
+		return trainees;
+	}
+
+	public void setTrainees(List<Trainee> trainees) {
+		this.trainees = trainees;
 	}
 	
 	

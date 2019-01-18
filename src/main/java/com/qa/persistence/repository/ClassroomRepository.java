@@ -4,6 +4,7 @@ public interface ClassroomRepository {
 
 	String getAllClassrooms();
 	String updateRoom(int id, String trainer);
+	String getFull(int roomID);
 	
 	
 }

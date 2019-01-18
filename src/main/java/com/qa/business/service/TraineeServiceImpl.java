@@ -27,4 +27,8 @@ public class TraineeServiceImpl implements TraineeService{
 		return repo.createTrainee(trainee);
 	}
 
+	public String deleteTrainee(int id) {
+		return repo.deleteTrainee(id);
+	}
+
 }

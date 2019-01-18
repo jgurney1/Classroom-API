@@ -62,10 +62,21 @@ public class TraineeDBRepository implements TraineeRepository{
 		return manager.find(Trainee.class, id);
 	}
 
+	@Transactional(REQUIRED)
 	public String createTrainee(String trainee) {
 		Trainee newTrainee = util.getObjectForJSON(trainee, Trainee.class);
 		manager.persist(newTrainee);
 		return "{\"message\": \"Trainee added\"}";
+	}
+	
+	@Transactional(REQUIRED)
+	public String deleteTrainee(int id) {
+		Trainee toDelete = findTrainee(id);
+		if(toDelete != null) {
+			manager.remove(toDelete);
+			return  "{\"message\": \"Trainee deleted\"}";
+		}
+		return  "{\"message\": \"Trainee not found\"}";
 	}
 
 }

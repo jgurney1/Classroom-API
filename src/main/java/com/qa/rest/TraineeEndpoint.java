@@ -1,6 +1,7 @@
 package com.qa.rest;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -41,5 +42,12 @@ public class TraineeEndpoint {
 	@Produces({"application/json"})
 	public String createTrainee(String trainee) {
 		return service.createTrainee(trainee);
+	}
+	
+	@Path("/deletetrainee")
+	@DELETE
+	@Produces({"application/json"})
+	public String deleteTrainee(int id) {
+		return service.deleteTrainee(id);
 	}
 }
